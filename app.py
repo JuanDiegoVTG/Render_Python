@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from sqlalchemy import text
 import os
 
 load_dotenv()
@@ -44,7 +45,13 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    try:
+        # Hacemos una pequeña consulta de prueba para verificar si la BD está viva
+        db.session.execute(text('SELECT 1'))
+        return render_template('index.html')
+    except Exception as e:
+        # Si la BD está caída (por contraseña mala, etc.), renderizamos la vista de error
+        return render_template('error.html', detalle_error=str(e)), 500
 
 #ENDPOINT de registro
 @app.route('/estudiantes' , methods=['POST'])

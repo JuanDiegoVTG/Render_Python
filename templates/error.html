@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error del Sistema - ADSO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f8d7da; display: flex; align-items: center; height: 100vh; }
+        .error-card { border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: none; }
+        .icon-error { font-size: 5rem; color: #dc3545; }
+    </style>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card error-card text-center p-5 bg-white">
+            <i class="bi bi-exclamation-triangle-fill icon-error mb-3"></i>
+            <h2 class="text-danger fw-bold">¡Falla Crítica!</h2>
+            <h5 class="text-secondary mb-4">Error 500: Falla en el Servidor o Base de Datos</h5>
+            
+            <p class="text-muted mb-4">
+                Lo sentimos, ha ocurrido un error inesperado al intentar procesar la solicitud o conectar con PostgreSQL. Por favor, verifica la conexión o contacta al administrador del sistema.
+            </p>
+            
+            {% if detalle_error %}
+            <div class="alert alert-danger text-start small overflow-auto" style="max-height: 100px;">
+                <strong>Detalle técnico:</strong> <br> {{ detalle_error }}
+            </div>
+            {% endif %}
+
+            <a href="/" class="btn btn-danger rounded-pill px-4 py-2 fw-bold mt-2">
+                <i class="bi bi-arrow-repeat me-2"></i>Volver al Inicio
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
